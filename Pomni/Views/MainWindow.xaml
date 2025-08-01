@@ -1,0 +1,79 @@
+﻿<Window x:Class="Pomni.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Pomni"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen">
+    <Grid Cursor="">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+
+        <!--Note List Background-->
+        <Rectangle Fill="{StaticResource NoteListBackground}" />
+        
+        <!--Note List Grid-->
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="35" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            
+            <!--Note Label-->
+            <Label Style="{StaticResource H1}"
+                   Content="Notes"
+                   VerticalAlignment="Center"
+                   Padding="15 0 0 0"
+                   IsHitTestVisible="False"/>
+            
+            <!--Add New Note button-->
+            <Button Style="{StaticResource RoundAccentButton}"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Height="40"
+                    Width="40"
+                    Margin="0 0 15 0">
+                <!--Icon-->
+                <Viewbox Width="25" Margin="0 0 0 5">
+                    <Path Data="{StaticResource NewNoteIcon}" Fill="{StaticResource OnAccent}" />
+                </Viewbox>
+            </Button>
+
+            <!--Search Note Bar-->
+            <TextBox x:Name="NoteSearchBox"
+                     Style="{StaticResource NoteListSearchBox}"
+                     Grid.Row="1"
+                     Margin="15 0"/>
+
+            <Label IsHitTestVisible="False"
+                   Grid.Row="1"
+                   Content="Search notes..."
+                   VerticalAlignment="Center"
+                   Margin="35 0"
+                   Foreground="{StaticResource Borders}"
+                   Visibility="{Binding Text.IsEmpty, ElementName=NoteSearchBox, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+
+            <Button Style="{StaticResource SearchButton}"
+                    Grid.Row="1"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Margin="0 0 25 0"
+                    Padding="10"
+                    Width="35"
+                    Height="35" Cursor="Hand">
+                
+               
+                <Viewbox Stretch="Uniform" Margin="8">
+                    <Image  Source="/Assets/Images/search.png"/>
+                </Viewbox>
+            </Button>
+
+        </Grid>
+
+    </Grid>
+</Window>

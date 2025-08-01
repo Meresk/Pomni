@@ -1,0 +1,19 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!--App Accent Dark-->
+    <SolidColorBrush x:Key="AccentDark" Color="#FF164863" />
+    <SolidColorBrush x:Key="AccentDarkOver" Color="#FF396A84" />
+    <SolidColorBrush x:Key="AccentDarkClick" Color="#FF66A3C5" />
+    <!--Note List Background-->
+    <SolidColorBrush x:Key="NoteListBackground" Color="#FFECECEC" />
+    <!--Note View Background-->
+    <SolidColorBrush x:Key="WindowBackground" Color="#FFFFFFFF" />
+    <!--Default Text Colour-->
+    <SolidColorBrush x:Key="DefaultText" Color="#FF474747" />
+    <!--On Accent-->
+    <SolidColorBrush x:Key="OnAccent" Color="#FFFFFFFF" />
+    
+    <!--Borders-->
+    <SolidColorBrush x:Key="Borders" Color="#FFCCCCCC" />
+
+</ResourceDictionary>
