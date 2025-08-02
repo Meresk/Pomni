@@ -73,7 +73,85 @@
                 </Viewbox>
             </Button>
 
+            
+            <!--List View For Note Items-->
+            <ListView Grid.Row="2"
+                      Background="Transparent"
+                      Margin="0 15"
+                      BorderBrush="Transparent">
+                
+            </ListView>
         </Grid>
 
+        <!--Note Viewer-->
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="20" />
+            </Grid.RowDefinitions>
+
+            <!--Note Title TextBlock-->
+            <TextBlock Style="{StaticResource NoteTitle}"
+                       Text="Note TODO: logic"
+                       VerticalAlignment="Center"
+                       Padding="15 0 0 0" />
+
+            <!--Buttons for Note-->
+            <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center">
+                <!--Additional Button-->
+                <Button Style="{StaticResource RoundAccentButton}"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Height="40"
+                        Width="40"
+                        Margin="0 0 15 0">  
+                    <!--Icon-->
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle Fill="White" Width="6" Height="6"/>
+                        <Rectangle Fill="White" Width="6" Height="6" Margin="4"/>
+                        <Rectangle Fill="White" Width="6" Height="6"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+
+            <!--Note Scroll Viewer-->
+            <ScrollViewer Grid.Row="1"
+                          VerticalScrollBarVisibility="Auto"
+                          HorizontalScrollBarVisibility="Disabled">
+                <!--Note Content-->
+                <TextBlock Text="This is short content for test"
+                           Foreground="{StaticResource DefaultText}"
+                           FontSize="16"
+                           Padding="15 10 0 0 ">
+
+                </TextBlock>
+            </ScrollViewer>
+            
+            <!--Created Note Date-->
+            <TextBlock Style="{StaticResource NoteTimeInfo}"
+                       Grid.Row="2"
+                       Text="03.08.2024   2:13 AM"
+                       Padding="15 0 0 0 " />
+            <!--Note Alarm Panel-->
+            <StackPanel Grid.Row="2"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Right">
+                
+                <!--Alarm Icon-->
+                <Viewbox Margin="3 3 3 3">
+                    <Path Data="{StaticResource AlarmIcon}" Fill="{StaticResource AccentDark}" />
+                </Viewbox>
+                
+                <!--Alarm Time TextBlock-->
+                <TextBlock Text="04.08.2024 5:05 PM"
+                           Style="{StaticResource NoteTimeInfo}"
+                           Padding="3 0 15 0"/>
+            </StackPanel>
+            
+
+        </Grid>
+        
     </Grid>
 </Window>

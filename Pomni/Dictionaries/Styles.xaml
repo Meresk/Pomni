@@ -98,4 +98,19 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    <!--Note Title-->
+    <Style x:Key="NoteTitle" TargetType="TextBlock">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{StaticResource DefaultText}" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontWeight" Value="Bold" />
+    </Style>
+
+    <!--Note Time Info-->
+    <Style x:Key="NoteTimeInfo" TargetType="TextBlock">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Foreground" Value="#FF535353" />
+    </Style>
 </ResourceDictionary>
