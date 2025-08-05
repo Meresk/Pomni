@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="Pomni.Views.NoteListItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Pomni.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="145" d:DesignWidth="250">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="20" />
+        </Grid.RowDefinitions>
+
+        <!--Note Item Title-->
+        <TextBlock Text="Title"
+                   Style="{StaticResource NoteTitle}"
+                   Margin="10 0"
+                   VerticalAlignment="Center"/>
+        
+        <!--Note Item Content-->
+        <TextBlock Grid.Row="1"
+                   Text="The first note is the first note about first note. Pomni is the application of not only one first note, it can has many notes and you should know abot this."
+                   TextWrapping="Wrap"
+                   Margin="10 5"/>
+        
+        <!--Note Item DateTime-->
+        <TextBlock Style="{StaticResource NoteTimeInfo}"
+                   FontSize="12"
+                   Grid.Row="2"
+                   Text="03.08.2024   2:13 AM"/>
+    </Grid>
+</UserControl>

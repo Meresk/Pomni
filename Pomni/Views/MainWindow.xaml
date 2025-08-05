@@ -3,11 +3,18 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:Pomni.ViewModels"
         xmlns:local="clr-namespace:Pomni"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="Pomni" Height="450" Width="800"
+        MinWidth="600" MinHeight="350"
         WindowStartupLocation="CenterScreen">
-    <Grid Cursor="">
+    
+    <Window.DataContext>
+        <vm:MainWindowViewModel />
+    </Window.DataContext>
+    
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250" />
             <ColumnDefinition Width="1*" />
@@ -23,7 +30,7 @@
                 <RowDefinition Height="35" />
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
-            
+
             <!--Note Label-->
             <Label Style="{StaticResource H1}"
                    Content="Notes"
@@ -37,7 +44,8 @@
                     VerticalAlignment="Center"
                     Height="40"
                     Width="40"
-                    Margin="0 0 15 0">
+                    Margin="0 0 15 0"
+                    Command="{Binding IOpenNewWidnow}" Cursor="Hand">
                 <!--Icon-->
                 <Viewbox Width="25" Margin="0 0 0 5">
                     <Path Data="{StaticResource NewNoteIcon}" Fill="{StaticResource OnAccent}" />

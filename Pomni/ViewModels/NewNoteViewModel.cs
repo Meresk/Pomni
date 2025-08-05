@@ -5,20 +5,20 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Pomni.ViewModels
 {
-    public class MainWindowViewModel : INotifyPropertyChanged
+    public class NewNoteViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public ICommand IOpenNewWidnow => new RelayCommand(OpenNewWindow);
+        public ICommand ICreateNote => new RelayCommand<Window>(CreateNote);
 
-        private void OpenNewWindow()
+        private void CreateNote(Window window)
         {
-            NewNoteWindow newNoteWindow = new NewNoteWindow();
-            newNoteWindow.Show();
+            window?.Close();
         }
 
         protected virtual void OnPropertyChanged(string propertyName)
