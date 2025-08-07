@@ -22,6 +22,7 @@
 
         <!--Note Title Box-->
         <TextBox x:Name="NoteTitleTextBox"
+                 Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}"
                  Style="{StaticResource NewNoteTitleTextBox}" />
 
         <Label IsHitTestVisible="False"
@@ -35,6 +36,7 @@
         <!--Note Content Box-->
         <TextBox x:Name="NoteContentTextBox"
                  Grid.Row="1"
+                 Text="{Binding Content, UpdateSourceTrigger=PropertyChanged}"
                  Style="{StaticResource NewNoteContentTextBox}" Cursor="IBeam" />
 
         <Label IsHitTestVisible="False"
@@ -45,10 +47,10 @@
                Foreground="{StaticResource Borders}"
                Visibility="{Binding Text.IsEmpty, ElementName=NoteContentTextBox, Converter={StaticResource BooleanToVisibilityConverter}}"/> 
         
-        <!--Note Notify Box-->
+        <!--Note Reminder Box-->
         <Grid Grid.Row="2" Cursor="">
             <Grid.RowDefinitions>
-                <RowDefinition Height="25"/>
+                <RowDefinition Height="35"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
 
@@ -60,11 +62,14 @@
                 </Grid.ColumnDefinitions>
 
                 <!--DatePicker Box-->
-                <DatePicker Margin="5 0 0 0" />
+                <DatePicker Margin="5 0 0 0"
+                            VerticalAlignment="Center"
+                            SelectedDate="{Binding ReminderDate, Mode=TwoWay}"/>
 
                 <!--TimePicker Box-->
                 <StackPanel Margin="0 0 5 0"
                             HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
                             Orientation="Horizontal"
                             Grid.Column="1">
                     <Label  Content="Time: " />
@@ -82,7 +87,7 @@
                     HorizontalAlignment="Right"
                     Margin="0 0 5 0"
                     Command="{Binding ICreateNote}"
-                    CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Cursor="Hand"/>
+                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Cursor="Hand"/>
         </Grid>
     </Grid>
 </Window>
