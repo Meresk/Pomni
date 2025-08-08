@@ -1,6 +1,9 @@
-﻿using Pomni.Views;
+﻿using Pomni.Models;
+using Pomni.Repositories;
+using Pomni.Views;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -11,16 +14,41 @@ namespace Pomni.ViewModels
 {
     public class MainWindowViewModel : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        private readonly INoteRepository _repo = new NoteRepository();
+        private static event EventHandler NotesUpdated;
 
-        public ICommand IOpenNewWidnow => new RelayCommand(OpenNewWindow);
+        public ObservableCollection<Note> Notes { get; } = new ObservableCollection<Note>();
 
-        private void OpenNewWindow()
+        public MainWindowViewModel()
         {
-            NewNoteWindow newNoteWindow = new NewNoteWindow();
-            newNoteWindow.Show();
+            NotesUpdated += OnNotesUpdated;
+            LoadNotes();
         }
 
+        private void OnNotesUpdated(object sender, EventArgs e)
+        {
+            LoadNotes();
+        }
+
+        public static void RaiseNotesUpdated()
+        {
+            NotesUpdated?.Invoke(null, EventArgs.Empty);
+        }
+
+        private void LoadNotes()
+        {
+            var notes = _repo.GetAll();
+            Notes.Clear();
+            foreach (var note in notes)
+                Notes.Add(note);
+        }
+
+        public ICommand IOpenNewWidnow => new RelayCommand(() =>
+        {
+            new NewNoteWindow().Show();
+        });
+
+        public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

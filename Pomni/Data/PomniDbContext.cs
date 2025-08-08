@@ -10,18 +10,18 @@ namespace Pomni.Data
     {
         public PomniDbContext() : base("name=PomniDb")
         {
-            string ihateEF6 = "SELECT name FROM sqlite_master WHERE type='table' AND name='Notes'";
+            string tableNotesExistQuery = "SELECT name FROM sqlite_master WHERE type='table' AND name='Notes'";
 
-            var res = Database.SqlQuery<string>(ihateEF6).FirstOrDefault();
+            var res = Database.SqlQuery<string>(tableNotesExistQuery).FirstOrDefault();
             if (res == null)
             {
-                CreateNotesTables();
+                CreateNotesTable();
             }
         }
 
         public DbSet<Note> Notes { get; set; }
 
-        private void CreateNotesTables()
+        private void CreateNotesTable()
         {
             string createTableSql = @"
             CREATE TABLE Notes (

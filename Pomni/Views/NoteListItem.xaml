@@ -14,14 +14,14 @@
         </Grid.RowDefinitions>
 
         <!--Note Item Title-->
-        <TextBlock Text="Title"
+        <TextBlock Text="{Binding Title}"
                    Style="{StaticResource NoteTitle}"
                    Margin="10 0"
                    VerticalAlignment="Center"/>
         
         <!--Note Item Content-->
         <TextBlock Grid.Row="1"
-                   Text="The first note is the first note about first note. Pomni is the application of not only one first note, it can has many notes and you should know abot this."
+                   Text="{Binding Content}"
                    TextWrapping="Wrap"
                    Margin="10 5"/>
         
@@ -29,6 +29,6 @@
         <TextBlock Style="{StaticResource NoteTimeInfo}"
                    FontSize="12"
                    Grid.Row="2"
-                   Text="03.08.2024   2:13 AM"/>
+                   Text="{Binding ReminderDateTime}"/>
     </Grid>
 </UserControl>

@@ -29,7 +29,7 @@ namespace Pomni.ViewModels
             note.SetReminder(ReminderDate);
 
             _repo.Add(note);
-
+            MainWindowViewModel.RaiseNotesUpdated();
             window?.Close();
         }
 

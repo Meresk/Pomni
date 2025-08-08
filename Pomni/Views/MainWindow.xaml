@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:Pomni.ViewModels"
-        xmlns:local="clr-namespace:Pomni"
+        xmlns:local="clr-namespace:Pomni.Views"
         mc:Ignorable="d"
         Title="Pomni" Height="450" Width="800"
         MinWidth="600" MinHeight="350"
@@ -83,11 +83,23 @@
 
             
             <!--List View For Note Items-->
-            <ListView Grid.Row="2"
+            <ListView ItemsSource="{Binding Notes}"
+                      Grid.Row="2"
                       Background="Transparent"
                       Margin="0 15"
                       BorderBrush="Transparent">
-                
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <local:NoteListItem />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel VirtualizingPanel.IsVirtualizing="True"/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
             </ListView>
         </Grid>
 
