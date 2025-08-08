@@ -31,7 +31,7 @@
                Margin="35 0"
                FontSize="16"
                Foreground="{StaticResource Borders}"
-               Visibility="{Binding Text.IsEmpty, ElementName=NoteTitleTextBox, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+               Visibility="{Binding Text.IsEmpty, ElementName=NoteTitleTextBox}"/>
 
         <!--Note Content Box-->
         <TextBox x:Name="NoteContentTextBox"

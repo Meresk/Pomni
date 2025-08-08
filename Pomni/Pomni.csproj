@@ -74,6 +74,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\NoteContentTrimmerConverter.cs" />
     <Compile Include="Data\PomniDbContext.cs" />
     <Compile Include="Repositories\INoteRepository.cs" />
     <Compile Include="Repositories\NoteRepository.cs" />

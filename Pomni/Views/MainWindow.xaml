@@ -87,7 +87,8 @@
                       Grid.Row="2"
                       Background="Transparent"
                       Margin="0 15"
-                      BorderBrush="Transparent">
+                      BorderBrush="Transparent"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled">
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
