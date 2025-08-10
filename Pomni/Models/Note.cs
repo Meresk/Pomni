@@ -13,6 +13,8 @@ namespace Pomni.Models
 
         public string Content { get; private set; }
 
+        public DateTime CreatedDate { get; private set; }
+
         public DateTime? ReminderDateTime { get; private set; }
 
         protected Note() { }
@@ -24,6 +26,7 @@ namespace Pomni.Models
 
             Title = title;
             Content = string.Empty;
+            CreatedDate = DateTime.Now;
         }
 
         public void UpdateTitle(string newTitle)

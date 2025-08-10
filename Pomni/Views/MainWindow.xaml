@@ -84,6 +84,7 @@
             
             <!--List View For Note Items-->
             <ListView ItemsSource="{Binding Notes}"
+                      SelectedItem="{Binding SelectedNote, Mode=TwoWay}"
                       Grid.Row="2"
                       Background="Transparent"
                       Margin="0 15"
@@ -114,7 +115,7 @@
 
             <!--Note Title TextBlock-->
             <TextBlock Style="{StaticResource NoteTitle}"
-                       Text="Note TODO: logic"
+                       Text="{Binding SelectedNote.Title}"
                        VerticalAlignment="Center"
                        Padding="15 0 0 0" />
 
@@ -141,7 +142,7 @@
                           VerticalScrollBarVisibility="Auto"
                           HorizontalScrollBarVisibility="Disabled">
                 <!--Note Content-->
-                <TextBlock Text="This is short content for test"
+                <TextBlock Text="{Binding SelectedNote.Content}"
                            Foreground="{StaticResource DefaultText}"
                            FontSize="16"
                            Padding="15 10 0 0 ">
@@ -152,7 +153,7 @@
             <!--Created Note Date-->
             <TextBlock Style="{StaticResource NoteTimeInfo}"
                        Grid.Row="2"
-                       Text="03.08.2024   2:13 AM"
+                       Text="{Binding SelectedNote.CreatedDate}"
                        Padding="15 0 0 0 " />
             <!--Note Alarm Panel-->
             <StackPanel Grid.Row="2"
@@ -166,7 +167,7 @@
                 </Viewbox>
                 
                 <!--Alarm Time TextBlock-->
-                <TextBlock Text="04.08.2024 5:05 PM"
+                <TextBlock Text="{Binding SelectedNote.ReminderDateTime}"
                            Style="{StaticResource NoteTimeInfo}"
                            Padding="3 0 15 0"/>
             </StackPanel>

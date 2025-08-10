@@ -16,8 +16,19 @@ namespace Pomni.ViewModels
     {
         private readonly INoteRepository _repo = new NoteRepository();
         private static event EventHandler NotesUpdated;
+        private Note _selectedNote;
 
         public ObservableCollection<Note> Notes { get; } = new ObservableCollection<Note>();
+
+        public Note SelectedNote
+        {
+            get { return _selectedNote; }
+            set
+            {
+                _selectedNote = value;
+                OnPropertyChanged(nameof(SelectedNote));
+            }
+        }
 
         public MainWindowViewModel()
         {
