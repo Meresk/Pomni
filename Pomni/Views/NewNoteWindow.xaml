@@ -64,6 +64,8 @@
                 <!--DatePicker Box-->
                 <DatePicker Margin="5 0 0 0"
                             VerticalAlignment="Center"
+                            DisplayDateStart="{x:Static system:DateTime.Today}"
+                            xmlns:system="clr-namespace:System;assembly=mscorlib"
                             SelectedDate="{Binding ReminderDate, Mode=TwoWay}"/>
 
                 <!--TimePicker Box-->
@@ -73,9 +75,20 @@
                             Orientation="Horizontal"
                             Grid.Column="1">
                     <Label  Content="Time: " />
-                    <ComboBox Width="30"  />
-                    <Label Content=":" />
-                    <ComboBox Width="30"  />
+                    <Grid Width="50">
+                        <TextBox x:Name="TimeTextBox"
+                                 TextAlignment="Left"
+                                 MaxLength="5"
+                                 Text="{Binding ReminderTime, Mode=TwoWay}"
+                                 Padding="5 5 0 0"
+                                 ToolTip="HH:MM"/>
+                        <Label Content="HH:MM"
+                               IsHitTestVisible="False"
+                               Foreground="{StaticResource Borders}"
+                               Visibility="{Binding Text.IsEmpty, ElementName=TimeTextBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+                               />
+                    </Grid>
+                    
                 </StackPanel>
             </Grid>
 

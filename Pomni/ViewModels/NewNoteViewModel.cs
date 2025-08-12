@@ -18,7 +18,44 @@ namespace Pomni.ViewModels
 
         public string Title { get; set; }
         public string Content { get; set; }
-        public DateTime? ReminderDate { get; set; }
+        public DateTime? ReminderDateTime { get; private set; }
+
+        private DateTime? _reminderDate;
+        private string _reminderTime;
+
+        public DateTime? ReminderDate
+        {
+            get => _reminderDate;
+            set
+            {
+                _reminderDate = value;
+                OnPropertyChanged(nameof(ReminderDate));
+                UpdateRimenderDateTime();
+            }
+        }
+        public string ReminderTime
+        {
+            get => _reminderTime;
+            set
+            {
+                if (TimeSpan.TryParse(value, out _))
+                {
+                    _reminderTime = value;
+                    OnPropertyChanged(nameof(ReminderTime));
+                    UpdateRimenderDateTime();
+                }
+            }
+        }
+
+        private void UpdateRimenderDateTime()
+        {
+            if (ReminderDate.HasValue && TimeSpan.TryParse(ReminderTime, out var time))
+                ReminderDateTime = ReminderDate.Value.Date + time;
+            else
+                ReminderDateTime = null;
+
+            OnPropertyChanged(nameof (ReminderDateTime));
+        }
 
         public ICommand ICreateNote => new RelayCommand<Window>(CreateNote);
 
@@ -26,7 +63,7 @@ namespace Pomni.ViewModels
         {
             var note = new Note(Title);
             note.UpdateContent(Content);
-            note.SetReminder(ReminderDate);
+            note.SetReminder(ReminderDateTime);
 
             _repo.Add(note);
             MainWindowViewModel.RaiseNotesUpdated();
