@@ -44,9 +44,12 @@ namespace Pomni.Repositories
         {
             using (var db = new PomniDbContext())
             {
-                var temp = new Note("temp");
-                db.Entry(temp).State = System.Data.Entity.EntityState.Deleted;
-                db.SaveChanges();
+                var note = db.Notes.Find(id);
+                if (note != null)
+                {
+                    db.Notes.Remove(note);
+                    db.SaveChanges();
+                }
             }
         }
     }

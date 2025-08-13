@@ -12,7 +12,11 @@
     <Window.DataContext>
         <vm:NewNoteViewModel />
     </Window.DataContext>
-    
+
+    <Window.Resources>
+       
+    </Window.Resources>
+
     <Grid Cursor="">
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
@@ -22,30 +26,25 @@
 
         <!--Note Title Box-->
         <TextBox x:Name="NoteTitleTextBox"
+                 Grid.Row="0"
+                 Tag="New Title..."
+                 Style="{StaticResource PlaceholderTextBox}"
                  Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}"
-                 Style="{StaticResource NewNoteTitleTextBox}" />
-
-        <Label IsHitTestVisible="False"
-               Content="New Title..."
-               VerticalAlignment="Center"
-               Margin="35 0"
-               FontSize="16"
-               Foreground="{StaticResource Borders}"
-               Visibility="{Binding Text.IsEmpty, ElementName=NoteTitleTextBox, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                 FontSize="16"
+                 Padding="35 10"/>
 
         <!--Note Content Box-->
         <TextBox x:Name="NoteContentTextBox"
                  Grid.Row="1"
+                 Tag="Content..."
+                 Style="{StaticResource PlaceholderTextBox}"
                  Text="{Binding Content, UpdateSourceTrigger=PropertyChanged}"
-                 Style="{StaticResource NewNoteContentTextBox}" Cursor="IBeam" />
-
-        <Label IsHitTestVisible="False"
-               Grid.Row="1"
-               Content="Content..."
-               Margin="35 10"
-               FontSize="16"
-               Foreground="{StaticResource Borders}"
-               Visibility="{Binding Text.IsEmpty, ElementName=NoteContentTextBox, Converter={StaticResource BooleanToVisibilityConverter}}"/> 
+                 FontSize="16"
+                 Padding="35 10"
+                 TextWrapping="Wrap"
+                 AcceptsReturn="True"
+                 VerticalScrollBarVisibility="Auto"
+                 Cursor="IBeam"/>
         
         <!--Note Reminder Box-->
         <Grid Grid.Row="2" Cursor="">
@@ -64,6 +63,8 @@
                 <!--DatePicker Box-->
                 <DatePicker Margin="5 0 0 0"
                             VerticalAlignment="Center"
+                            DisplayDateStart="{x:Static system:DateTime.Today}"
+                            xmlns:system="clr-namespace:System;assembly=mscorlib"
                             SelectedDate="{Binding ReminderDate, Mode=TwoWay}"/>
 
                 <!--TimePicker Box-->
@@ -73,9 +74,20 @@
                             Orientation="Horizontal"
                             Grid.Column="1">
                     <Label  Content="Time: " />
-                    <ComboBox Width="30"  />
-                    <Label Content=":" />
-                    <ComboBox Width="30"  />
+                    <Grid Width="50">
+                        <TextBox x:Name="TimeTextBox"
+                                 TextAlignment="Left"
+                                 MaxLength="5"
+                                 Text="{Binding ReminderTime, Mode=TwoWay}"
+                                 Padding="5 5 0 0"
+                                 ToolTip="HH:MM"/>
+                        <Label Content="HH:MM"
+                               IsHitTestVisible="False"
+                               Foreground="{StaticResource Borders}"
+                               Visibility="{Binding Text.IsEmpty, ElementName=TimeTextBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+                               />
+                    </Grid>
+                    
                 </StackPanel>
             </Grid>
 

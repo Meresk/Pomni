@@ -4,8 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Pomni.Views"
+             xmlns:conv="clr-namespace:Pomni.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="145" d:DesignWidth="250">
+    <UserControl.Resources>
+        <conv:NoteContentTrimmerConverter x:Key="TextTrimmer" />
+    </UserControl.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="35" />
@@ -21,14 +26,15 @@
         
         <!--Note Item Content-->
         <TextBlock Grid.Row="1"
-                   Text="{Binding Content}"
+                   Text="{Binding Content, Converter={StaticResource TextTrimmer}}"
                    TextWrapping="Wrap"
                    Margin="10 5"/>
         
         <!--Note Item DateTime-->
         <TextBlock Style="{StaticResource NoteTimeInfo}"
+                   Padding="10 0 0 0 "
                    FontSize="12"
                    Grid.Row="2"
-                   Text="{Binding ReminderDateTime}"/>
+                   Text="{Binding CreatedDate}"/>
     </Grid>
 </UserControl>

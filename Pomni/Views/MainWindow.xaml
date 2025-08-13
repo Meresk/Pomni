@@ -84,10 +84,12 @@
             
             <!--List View For Note Items-->
             <ListView ItemsSource="{Binding Notes}"
+                      SelectedItem="{Binding SelectedNote, Mode=TwoWay}"
                       Grid.Row="2"
                       Background="Transparent"
                       Margin="0 15"
-                      BorderBrush="Transparent">
+                      BorderBrush="Transparent"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled">
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -113,14 +115,16 @@
 
             <!--Note Title TextBlock-->
             <TextBlock Style="{StaticResource NoteTitle}"
-                       Text="Note TODO: logic"
+                       Text="{Binding SelectedNote.Title}"
                        VerticalAlignment="Center"
                        Padding="15 0 0 0" />
 
             <!--Buttons for Note-->
             <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center">
                 <!--Additional Button-->
-                <Button Style="{StaticResource RoundAccentButton}"
+                <Button Command="{Binding OpenContextMenuCommand}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                        Style="{StaticResource RoundAccentButton}"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
                         Height="40"
@@ -132,6 +136,19 @@
                         <Rectangle Fill="White" Width="6" Height="6" Margin="4"/>
                         <Rectangle Fill="White" Width="6" Height="6"/>
                     </StackPanel>
+                    
+                    <!--Context Menu-->
+                    <Button.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Reminder"
+                                      Command="{Binding SetReminderNoteCommand}"
+                                      CommandParameter="{Binding SelectedNote}"/>
+                            <MenuItem Header="Delete"
+                                      Foreground="Red"
+                                      Command="{Binding DeleteNoteCommand}"
+                                      CommandParameter="{Binding SelectedNote}"/>
+                        </ContextMenu>
+                    </Button.ContextMenu>
                 </Button>
             </StackPanel>
 
@@ -140,10 +157,11 @@
                           VerticalScrollBarVisibility="Auto"
                           HorizontalScrollBarVisibility="Disabled">
                 <!--Note Content-->
-                <TextBlock Text="This is short content for test"
+                <TextBlock Text="{Binding SelectedNote.Content}"
                            Foreground="{StaticResource DefaultText}"
                            FontSize="16"
-                           Padding="15 10 0 0 ">
+                           TextWrapping="Wrap"
+                           Padding="15 10 15 0 ">
 
                 </TextBlock>
             </ScrollViewer>
@@ -151,7 +169,7 @@
             <!--Created Note Date-->
             <TextBlock Style="{StaticResource NoteTimeInfo}"
                        Grid.Row="2"
-                       Text="03.08.2024   2:13 AM"
+                       Text="{Binding SelectedNote.CreatedDate}"
                        Padding="15 0 0 0 " />
             <!--Note Alarm Panel-->
             <StackPanel Grid.Row="2"
@@ -165,7 +183,7 @@
                 </Viewbox>
                 
                 <!--Alarm Time TextBlock-->
-                <TextBlock Text="04.08.2024 5:05 PM"
+                <TextBlock Text="{Binding SelectedNote.ReminderDateTime}"
                            Style="{StaticResource NoteTimeInfo}"
                            Padding="3 0 15 0"/>
             </StackPanel>

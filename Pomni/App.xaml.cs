@@ -22,7 +22,7 @@ namespace Pomni
             {
                 try
                 {
-                    _ = db.Notes.FirstOrDefault(); // Просто проверочный запрос
+                    _ = db.Notes.FirstOrDefault();
                 }
                 catch
                 {

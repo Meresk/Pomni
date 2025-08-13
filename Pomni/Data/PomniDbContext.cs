@@ -28,6 +28,7 @@ namespace Pomni.Data
                 Id INTEGER PRIMARY KEY AUTOINCREMENT,
                 Title NVARCHAR(255) NOT NULL,
                 Content TEXT,
+                CreatedDate DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
                 ReminderDateTime DATETIME
             )";
 
