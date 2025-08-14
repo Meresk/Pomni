@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace Pomni.ViewModels
@@ -19,8 +20,54 @@ namespace Pomni.ViewModels
         private readonly INoteRepository _repo = new NoteRepository();
         private static event EventHandler NotesUpdated;
         private Note _selectedNote;
+        private string _searchNoteText;
+        private readonly ObservableCollection<Note> _notes = new ObservableCollection<Note>();
+        private ICollectionView _notesView;
 
-        public ObservableCollection<Note> Notes { get; } = new ObservableCollection<Note>();
+        public MainWindowViewModel()
+        {
+            NotesUpdated += OnNotesUpdated;
+            LoadNotes();
+
+            NotesView.SortDescriptions.Add(new SortDescription("CreatedDate", ListSortDirection.Descending));
+        }
+
+        public ICollectionView NotesView
+        {
+            get 
+            {
+                if (_notesView == null)
+                {
+                    _notesView = CollectionViewSource.GetDefaultView(_notes);
+                    _notesView.Filter = NoteFilter;
+                }
+                return _notesView; 
+            }
+        }
+
+        public string SearchNoteText
+        {
+            get { return _searchNoteText; }
+            set
+            {
+                _searchNoteText = value;
+                OnPropertyChanged(nameof(SearchNoteText));
+                NotesView.Refresh();
+            }
+        }
+
+        private bool NoteFilter(object item)
+        {
+            if (string.IsNullOrWhiteSpace(SearchNoteText))
+                return true;
+
+            var note = item as Note;
+            if (note == null) return false;
+
+            string search = SearchNoteText.ToLower().Trim();
+            return note.Title.ToLower().Contains(search) || 
+                (note.Content != null && note.Content.ToLower().Contains(search));
+        }
 
         public Note SelectedNote
         {
@@ -30,12 +77,6 @@ namespace Pomni.ViewModels
                 _selectedNote = value;
                 OnPropertyChanged(nameof(SelectedNote));
             }
-        }
-
-        public MainWindowViewModel()
-        {
-            NotesUpdated += OnNotesUpdated;
-            LoadNotes();
         }
 
         private void OnNotesUpdated(object sender, EventArgs e)
@@ -50,10 +91,10 @@ namespace Pomni.ViewModels
 
         private void LoadNotes()
         {
-            var notes = _repo.GetAll().OrderByDescending(n => n.CreatedDate).ToList();
-            Notes.Clear();
+            var notes = _repo.GetAll().ToList();
+            _notes.Clear();
             foreach (var note in notes)
-                Notes.Add(note);
+                _notes.Add(note);
         }
 
         public ICommand OpenContextMenuCommand => new RelayCommand<Button>(button =>
@@ -86,7 +127,7 @@ namespace Pomni.ViewModels
             if (result == MessageBoxResult.Yes)
             {
                 _repo.Delete(SelectedNote.Id);
-                Notes.Remove(SelectedNote);
+                _notes.Remove(SelectedNote);
             }
         });
 

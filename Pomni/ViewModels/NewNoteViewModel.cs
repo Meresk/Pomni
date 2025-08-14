@@ -54,7 +54,7 @@ namespace Pomni.ViewModels
             else
                 ReminderDateTime = null;
 
-            OnPropertyChanged(nameof (ReminderDateTime));
+            OnPropertyChanged(nameof(ReminderDateTime));
         }
 
         public ICommand ICreateNote => new RelayCommand<Window>(CreateNote);
